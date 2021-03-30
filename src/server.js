@@ -1,31 +1,22 @@
+const path = require("path");
 const express = require("express");
 const  app = express();
 
+//Middleware
 app.use(express.json());
+const public_directory = path.join(__dirname, "../public/")
+app.use(express.static(public_directory))
 
-
+//Routes
 app.get("/", (req, res) => {
-    console.log(req.query);
-    res.send({ message: "Hello mate", date: "29th March 2021"});
+    // res.send();
 });
 
-app.get("/profile", (req, res) => {
-    res.send({message: `hello  my name is ${req.query.name}`})
-    //localhost:5000/profile/?name=ben     this is the query for name
-});
-
-app.get("/person/:id", (req, res) => {
-    console.log(req.params.id);
-
-    res.send({ message: "hello" })
-});
-
-app.post("/", (req, res) => {
+app.post("/tasks", (req, res) => {
     console.log(req.body);
-
-    res.send({ data: req.body })
+    res.send({ message: "success!" })
 });
 
 app.listen(5000, () => {
     console.log("listening on port 5000");
-})
+}) 
